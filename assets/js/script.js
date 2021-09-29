@@ -1,69 +1,123 @@
-// var searchBar = document.getElementById('search');
-// var resultBtn = document.getElementById('results');
-// const apiKey = 'bc2b73a421d210492be3fafaed889abe';
-
-// const curDate = document.getElementById('currentDate');
-// const curIcon = document.getElementById('currentIcon');
-// const curTemp = document.getElementById('currentTemp');
-// const curWind = document.getElementById('currentWind');
-// const curHum = document.getElementById('currentHumidity');
-// const curUvi = document.getElementById('currentUv');
-// var cities = [];
-// var states = [' ','AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'];
 
 
-// function getApiUrl(){
-//     var urlRequest = 'https://api.openweathermap.org/data/2.5/onecall?q=Atlanta,us&appid=apiKey'
+//global vars for current and forecast data:
+var currentData;
+var forecastArray = [];
 
-//     fetch(urlRequest)
-//       .then(function (response) {
-//           return response.json();
-//       })
-//       .then (function (data) {
-//         console.log(data)
-//       })
- 
-// }
+var searchHistory = [];
 
-
-function GetInfo() {
-  const cityName= document.getElementById('search');
+function GetInfo(cityName) {
   const currrentCity= document.getElementById('currentCity');
-  currentCity.innerHTML = cityName;
+  currentCity.innerText = cityName;
+
+  //add searched city to history/localStorage
+  handleSaveLocalStorage(cityName);
 
 
-fetch('https://api.openweathermap.org/data/2.5/forecast?q='+cityName.value+'&appid=bc2b73a421d210492be3fafaed889abe')
+fetch('https://api.openweathermap.org/data/2.5/forecast?q='+cityName+'&appid=bc2b73a421d210492be3fafaed889abe')
 .then(response => response.json())
 .then(data =>{
-    for(i+0;i<5;i++){
-      document.getElementById('day' +(i+1)+'Temp').innerHTML ='Temp:' + Number(data.list[i].main.temp -250.71).toFixed(1)+'';     
-    }
-    for(i+0;i<5;i++){
-      document.getElementById('day' +(i+1)+'Wind').innerHTML ='Wind:' + Number(data.list[i].main.temp).toFixed(1)+'';     
-    }
-    for(i+0;i<5;i++){
-      document.getElementById('day' +(i+1)+'Humidity:').innerHTML ='Humidity:' + Number(data.list[i].main.humidity -10).toFixed(1)+'';
-    }
+  fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.city.coord.lat}&lon=${data.city.coord.lon}&units=imperial&appid=bc2b73a421d210492be3fafaed889abe`)
+  .then(response2 => response2.json())
+  .then(data2 => {
+    currentData = data2.current;
+    forecastArray = data2.daily;
+
+    //// display current data
+    console.log("CURRENT")
+  console.log(currentData)
+  var todayDate = new Date(currentData.dt * 1000);
+  console.log("today:::", todayDate)
+
+  //set temp for current 
+  document.getElementById('currentDate').innerText = "Date: " + todayDate.toLocaleDateString();
+  document.getElementById("currentTemp").innerText = "Temp: " + currentData.temp;
+  document.getElementById("currentWind").innerText = "Wind: " + currentData.wind_speed;
+  document.getElementById("currentUv").innerText = "UV Index: " + currentData.uvi;
+  
+  
+  //////////
+  //// Display forecast data
+  ///// "tomorrow" is index position 1 (0 is today)
+  console.log("FORECAST")
+  console.log(forecastArray)
+
+  //set day 1 (tomorrow) date and temp
+  var card1Date = new Date(forecastArray[1].dt * 1000);
+  document.querySelector(".card1Date").innerText = card1Date.toLocaleDateString();
+  document.querySelector("#day1Temp").innerText = "Temp: " + forecastArray[1].temp.day;
+  document.querySelector("#day1Wind").innerText = "Wind: " + forecastArray[1].temp.day;
+  document.querySelector("#day1Humidity").innerText = "Humidity: " + forecastArray[1].temp.day;
+
+  //set day 2 date and temp
+  var card2Date = new Date(forecastArray[2].dt * 1000);
+  document.querySelector(".card2Date").innerText = card2Date.toLocaleDateString();
+  document.querySelector("#day2Temp").innerText = "Temp: " + forecastArray[2].temp.day;
+  document.querySelector("#day2Wind").innerText = "Wind: " + forecastArray[2].temp.day;
+  document.querySelector("#day2Humidity").innerText = "Humidity: " + forecastArray[2].temp.day;
+
+  //set day 3 date and temp
+  var card3Date = new Date(forecastArray[3].dt * 1000);
+  document.querySelector(".card3Date").innerText = card3Date.toLocaleDateString();
+  document.querySelector("#day3Temp").innerText = "Temp: " + forecastArray[3].temp.day;
+  document.querySelector("#day3Wind").innerText = "Wind: " + forecastArray[3].temp.day;
+  document.querySelector("#day3Humidity").innerText = "Humidity: " + forecastArray[3].temp.day;
+
+  //set day 4 date and temp
+  var card4Date = new Date(forecastArray[4].dt * 1000);
+  document.querySelector(".card4Date").innerText = card4Date.toLocaleDateString();
+  document.querySelector("#day4Temp").innerText = "Temp: " + forecastArray[4].temp.day;
+  document.querySelector("#day4Wind").innerText = "Wind: " + forecastArray[4].temp.day;
+  document.querySelector("#day4Humidity").innerText = "Humidity: " + forecastArray[4].temp.day;
+
+
+  //set day 5 date and temp
+  var card5Date = new Date(forecastArray[5].dt * 1000);
+  document.querySelector(".card5Date").innerText = card5Date.toLocaleDateString();
+  document.querySelector("#day5Temp").innerText = "Temp: " + forecastArray[5].temp.day;
+  document.querySelector("#day5Wind").innerText = "Wind: " + forecastArray[5].temp.day;
+  document.querySelector("#day5Humidity").innerText = "Humidity: " + forecastArray[5].temp.day;
+
+  })
+
+
 
 })
 
-.catch(err => alert("Something Went Wrong"))
-}
-const d =new Date();
-const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-function CheckDay(day){
-  if(day +d.getDay() > 6){
-    return day +d.getDay()-7;
-}
-  else{
-  return day +d.getDay();
-}
-}
-
-for(i=0;i<5;i++){
-  document.getElementById('day'+(i)).innerHTML = weekday[CheckDay(i)];
-}
 
 
-searchBar.addEventListener('click', GetFiveDay);
+}
+function handleLoadLocalStorage() {
+  searchHistory = JSON.parse(localStorage.getItem("weather-history"));
+  var historyDiv = document.getElementById("search-history-buttons");
+  historyDiv.addEventListener('click', handleSearchFromSaved);
+
+  for (let i = 0; i < searchHistory.length; i++ ) {
+    let newBtn = document.createElement("button");
+    newBtn.innerText = searchHistory[i];
+    historyDiv.append(newBtn)
+  }
+  console.log(searchHistory);
+}
+
+function handleSaveLocalStorage(searchedCity) {
+  searchHistory.unshift(searchedCity)
+  var newHistory = JSON.stringify(searchHistory)
+  localStorage.setItem("weather-history", newHistory);
+}
+
+function handleSearchFromSaved(event){
+  GetInfo(event.target.innerText);
+}
+
+function handleSearchFromQuery(){
+  const cityName= document.getElementById('search');
+  GetInfo(cityName.value)
+}
+
+
+document.getElementById("searchBtn").addEventListener('click', handleSearchFromQuery);
+
+
+//run on apllication load
+handleLoadLocalStorage();
