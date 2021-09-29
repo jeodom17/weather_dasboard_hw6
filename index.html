@@ -4,44 +4,109 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Dashboard</title>
   </head>
+
   <body>
-    <header>Weather Dashboard</header>
 
-    <main id="searchArea">
-      <aside id="searchBlock">
-        <form id="citySearch">
-          <h2 id="formTitle">Search for a City:</h2>
+    <header class="container1">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h1>Weather Dashboard</h1>
+        </div>
+      
+    </header>
 
-          <input id="search" type="text" placeholder="City" />
-
-          <button id="searchBtn">Search</button>
-        </form>
-
-        <hr />
-
-        <div id="searchHistory"></div>
-      </aside>
-
-      <section>
-        <div id="weatherInfo">
-          <h2 id="currentCity"></h2>
-          <h2 id="currentDate"></h2>
-          <p id="currentTemp"></p>
-          <p id="currentWind"></p>
+    <div class="container">
+      <div class="row">
+        <div id="citySearch" class="col-md-4 border border-primary sections">
+          <form>
+            <h2 id="formTitle">Search for a City:</h2>
+            <input for="inputCity" type="text" class="form-control mb-4" id="search" placeholder="City">
+            
+            <button onclick="GetInfo()" type="button" id="searchBtn" class="btn btn-primary btn-lg btn-block mb-2">Search</button>
+          </form>
+        </div>
+      
+        <div id="currentWeather" class="col-md-8 border border-primary sections">
+          <h2 id="currentCity">Location</h2>
+          <h2 id="currentDate">Date</h2>
+          <p id="currentTemp">Temp:</p>
+          <p id="currentWind">Humidity</p>
           <p id="currentHumidity"></p>
-          <p id="currentUv">UV Index:</p>
+          <p id="currentUv">UV Index:</p> 
         </div>
 
-        <div id="forecast">
+        <div id="searchHistory" class="col-md-4 border border-primary sections">
+          <h5> SEARCH HISTORY</h5>
+        </div>
+
+        <div id="forecast" class="col-md-8 border border-primary sections">
           <h3>5-Day Forecast</h3>
-          <div id="dayCards"></div>
-        </div>
-      </section>
-    </main>
+          <div class="row">
+            <div id="card1" class="card text-white bg-primary mb-3 col-md-3" style="max-width: 18rem;">
+              <div class="card-header card1Date">Day 1</div>
+              <div class="card-body">
+              <img src="..." alt="..." class="img-thumbnail card1Icon">
+              <p class="card-text card1Temp" id="day1Temp">Temp:</p>
+              <p class="card-text card1Wind" id="day1Wind">Wind:</p>
+              <p class="card-text card1Humidity" id="day1Humidity">Humidity:</p>
+              </div>
+            </div>
+ 
 
-    <script src="./assets/js/script.js"></script>
+            <div id="card2" class="card text-white bg-primary mb-3 col-md-3" style="max-width: 18rem;">
+              <div class="card-header card2Date">Day 2</div>
+              <div class="card-body">
+              <img src="..." alt="..." class="img-thumbnail card1Icon">
+              <p class="card-text card2Temp" id="day2Temp">Temp:</p>
+              <p class="card-text card2Wind" id="day2Wind">Wind:</p>
+              <p class="card-text card2Humidity"id="day2Humidity">Humidity:</p>
+              </div>
+            </div>
+
+            <div id="card3" class="card text-white bg-primary mb-3 col-md-3" style="max-width: 18rem;">
+              <div class="card-header card3Date">Day 3</div>
+              <div class="card-body">
+              <img src="..." alt="..." class="img-thumbnail card1Icon">
+              <p class="card-text card3Temp" id="day3Temp">Temp:</p>
+              <p class="card-text card3Wind"id="day3Wind">Wind:</p>
+              <p class="card-text card3Humidity"id="day3Humidity">Humidity:</p>
+              </div>
+            </div>
+
+            <div id="card4" class="card text-white bg-primary mb-3 col-md-3" style="max-width: 18rem;">
+              <div class="card-header card4Date">Day 4</div>
+              <div class="card-body">
+              <img src="..." alt="..." class="img-thumbnail card4Icon">
+              <p class="card-text card4Temp" id="day4Temp">Temp:</p>
+              <p class="card-text cardz4Wind" id="day4Wind">Wind:</p>
+              <p class="card-text card4Humidity" id="day4Humidity">Humidity:</p>
+              </div>
+            </div>
+
+            <div id="card5" class="card text-white bg-primary mb-3 col-md-3" style="max-width: 18rem;">
+              <div class="card-header card5Date">Day 5</div>
+              <div class="card-body">
+              <img src="..." alt="..." class="img-thumbnail card5Icon">
+              <p class="card-text card5Temp" id="day5Temp">Temp:</p>
+              <p class="card-text card5Wind"id="day5Wind">Wind:</p>
+              <p class="card-text card5Humidity"id="day5Humidity">Humidity:</p>
+              </div>
+            </div>
+
+          </div>
+          
+        </div>
+        <div id="dayCards">
+        </div>
+    </div>
+  </div>
+    
+     
+<script src='./assets/js/script.js'></script>
   </body>
-</html>
+  </html>
+  

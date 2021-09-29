@@ -3,18 +3,31 @@
 }
 
 body {
+
 }
 
 header {
+  text-align: center;
+ 
 }
 
-main {
+.container { 
+
+  
+}
+
+.sections {
+
 }
 
 #searchBlock {
 }
 
 #citySearch {
+  
+}
+
+#currentWeather{
 }
 
 #formTitle {
@@ -24,7 +37,11 @@ main {
 }
 
 #searchBtn {
+  width: 355px;
 }
 
 #searchHistory {
+}
+
+#forecast {
 }
