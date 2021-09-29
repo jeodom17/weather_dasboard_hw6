@@ -28,21 +28,21 @@
 
 function GetInfo() {
   const cityName= document.getElementById('search');
-  const curCity= document.getElementById('currentCity');
-  curren†City.innerHTML = '--'+cityName+'--'
+  const currrentCity= document.getElementById('currentCity');
+  currentCity.innerHTML = cityName;
 
 
 fetch('https://api.openweathermap.org/data/2.5/forecast?q='+cityName.value+'&appid=bc2b73a421d210492be3fafaed889abe')
 .then(response => response.json())
 .then(data =>{
     for(i+0;i<5;i++){
-      document.getElementById('day' +(i+1)+'Temp').innerHTML ='Temp:' + Number(data.list[i].main.temp -300.71).toFixed(1)+'%';     
+      document.getElementById('day' +(i+1)+'Temp').innerHTML ='Temp:' + Number(data.list[i].main.temp -250.71).toFixed(1)+'';     
     }
     for(i+0;i<5;i++){
-      document.getElementById('day' +(i+1)+'Wind').innerHTML ='Wind:' + Number(data.list[i].main.temp).toFixed(1)+'%';     
+      document.getElementById('day' +(i+1)+'Wind').innerHTML ='Wind:' + Number(data.list[i].main.temp).toFixed(1)+'';     
     }
     for(i+0;i<5;i++){
-      document.getElementById('day' +(i+1)+'Humidity:').innerHTML ='Humidity' + Number(data.list[i].main.humidity -10).toFixed(1)+'%';
+      document.getElementById('day' +(i+1)+'Humidity:').innerHTML ='Humidity:' + Number(data.list[i].main.humidity -10).toFixed(1)+'';
     }
 
 })
@@ -66,4 +66,4 @@ for(i=0;i<5;i++){
 }
 
 
-// searchBar.addEventListener('click', GetFiveDay);
+searchBar.addEventListener('click', GetFiveDay);
